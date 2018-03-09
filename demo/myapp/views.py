@@ -32,6 +32,7 @@ class BadView(TemplateView):
     template_name = "myapp/goodbad.html"
 
     def get_context_data(self, **kwargs):
+        number = 3
         context = super(BadView, self).get_context_data(**kwargs)
         context['good_or_bad'] = 'Broken'
         context['body_text'] = 'This will never be shown.'

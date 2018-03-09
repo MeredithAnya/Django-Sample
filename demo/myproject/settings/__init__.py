@@ -19,14 +19,18 @@ USE_DEV_SETTINGS = True
 
 if USE_DEV_SETTINGS:
     from .development import *
+    ENV = 'development'
 else:
     from .production import *
+    ENV = 'production'
 
 import os
 import raven
 # After the other settings are loaded, build the config dict that Raven will use
+
 RAVEN_CONFIG = {
     'dsn': MY_SENTRY_DSN,
-    'release': raven.fetch_git_sha(os.path.abspath(os.pardir + '/..')),   # You can track different releases of your app in Sentry
+    'environment': ENV,
+    'release': raven.fetch_git_sha(os.path.abspath(os.path.dirname('..'))),   # You can track different releases of your app in Sentry
                           # See https://docs.sentry.io/learn/releases/ for details
 }
